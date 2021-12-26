@@ -106,6 +106,20 @@
         border-top-left-radius: 0;
         border-top-right-radius: 0;
     }
+
+    .fa-eye {
+        position: absolute;
+        top: 20px;
+        left: 16px
+    }
 </style>
 
+@endpush
+
+@push('scripts')
+<script src="https://code.jquery.com/jquery-3.6.0.slim.js" integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-show-password/1.0.3/bootstrap-show-password.min.js"></script>
+<script type="text/javascript">
+    $("#password").password('toggle');
+</script>
 @endpush

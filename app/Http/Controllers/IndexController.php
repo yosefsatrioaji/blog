@@ -17,4 +17,10 @@ class IndexController extends Controller
     {
         return view('show',compact('post'));
     }
+
+    public function search(Request $request)
+    {
+        $posts = Posts::where('judul', 'LIKE', '%' . $request->input('search') . '%')->paginate(10);
+        return view('index', compact('posts'));
+    }
 }

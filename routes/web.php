@@ -22,6 +22,7 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 Route::get('/',[IndexController::class,'index'])->name('index');
 Route::get('/posts/{post:slug}',[IndexController::class,'show'])->name('show');
+Route::get('/search/posts',[IndexController::class,'search'])->name('search');
 
 Route::group(['middleware' => ['guest']], function () {
     Route::get('/login',[AuthController::class,'login'])->name('login');
@@ -30,7 +31,7 @@ Route::group(['middleware' => ['guest']], function () {
     Route::post('/signup',[AuthController::class,'signup'])->name('signup');
 });
 
-Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
+Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['role:super admin']], function () {
     \UniSharp\LaravelFilemanager\Lfm::routes();
 });
 
@@ -43,6 +44,10 @@ Route::group(['middleware' => ['role:super admin']], function () {
     Route::post('/post/store',[PostController::class,'store'])->name('post.store');
     Route::post('/upload_image', [TinyController::class,'imageUpload'])->name('tiny.image-upload');
     Route::get('/post/create',[PostController::class,'createView'])->name('post.create');
+    Route::get('/post/{post}/show',[PostController::class,'show'])->name('post.show');
+    Route::get('/post/list',[PostController::class,'list'])->name('post.list');
+    Route::get('/post/trash',[PostController::class,'trash'])->name('post.trash');
+    Route::get('/post/{post}/edit',[PostController::class,'edit'])->name('post.edit');
+    Route::put('/post/{post}/store',[PostController::class,'update'])->name('post.update');
+    Route::delete('/post/{post}/delete',[PostController::class,'delete'])->name('post.delete');
 });
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'home'])->name('home');

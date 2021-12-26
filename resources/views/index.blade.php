@@ -11,14 +11,14 @@
                 </div>
                 @endif
                 <div class="flex flex-col justify-between flex-1">
-                    <h2 class="card-title mb-6">{{$post->judul}}</h2>
-                    <p class="mb-6">
+                    <h2 class="font-sans leading-normal block mb-6">{{$post->judul}}</h2>
+                    <p class="mb-6 leading-normal leading-loose">
                         {{$post->ringkasan}}
                     </p>
-                    <div class="flex items-center text-sm" style="opacity: 0.7;">
-                        <img src="" alt="">
-                        <span class="ml-2">{{$post->user->name}}</span>
-                        <span class="ml-auto">{{ \Carbon\Carbon::parse($post->created_at)->diffForHumans() }}</span>
+                    <div class="flex items-center text-sm">
+                        <img src="{{asset('assets/img/profile_pict/'.$post->user->profile_pict)}}" class="w-10 h-10 rounded-full">
+                        <span class="ml-2" style="opacity: 0.7;">{{$post->user->name}}</span>
+                        <span class="ml-auto" style="opacity: 0.7;">{{ \Carbon\Carbon::parse($post->created_at)->diffForHumans() }}</span>
                     </div>
                 </div>
             </div>
@@ -29,9 +29,8 @@
 @endsection
 
 @push('styles')
-<style type="text/css" scoped="true">
-    @import "{{asset('assets/css/theme.css')}}";
-
+<link rel="stylesheet" href="{{asset('assets/css/theme.css')}}">
+<style type="text/css">
     /* unvisited link */
     a:link {
         color: #22292f;

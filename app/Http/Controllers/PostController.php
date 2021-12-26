@@ -9,6 +9,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
+use PhpParser\Node\Expr\AssignOp\Mod;
 
 class PostController extends Controller
 {
@@ -34,8 +35,8 @@ class PostController extends Controller
         ]);
         $cover = time() . '-' . $request->cover->getClientOriginalName();
         //$coverUpload = Storage::putFileAs('covers', $request->file('cover'), $cover,'public');
-        $coverUpload = $request->file('cover')->storeAs('public/covers',$cover);
-        $slug = Str::slug($request->input('judul').'-'.time(), '-');
+        $coverUpload = $request->file('cover')->storeAs('public/covers', $cover);
+        $slug = Str::slug($request->input('judul') . '-' . time(), '-');
         try {
             $postRequest = [
                 'user_id' => Auth::id(),
@@ -50,9 +51,51 @@ class PostController extends Controller
             DB::beginTransaction();
             $post = Posts::create($postRequest);
             DB::commit();
-            return redirect('/dashboard')->with('postSuccess','Berhasil menambahkan post');
+            return redirect('/dashboard')->with('postSuccess', 'Berhasil menambahkan post');
         } catch (ModelNotFoundException $ex) {
             //
         }
+    }
+
+    public function show(Posts $post)
+    {
+        return view('pages.post.show', compact('post'));
+    }
+
+    public function list()
+    {
+        $posts = Posts::orderBy('created_at', 'desc')->paginate(100);
+        return view('pages.post.list', compact('posts'));
+    }
+
+    public function edit()
+    {
+        //
+    }
+
+    public function update()
+    {
+        //
+    }
+
+    public function delete(Posts $post)
+    {
+        try {
+            $post->delete();
+            return redirect('/post/list')->with('success', 'Post deleted successfully.');
+        } catch (ModelNotFoundException $e) {
+            return back()->withError($e->getMessage())->withInput();
+        }
+    }
+
+    public function trash() {
+        $posts = Posts::onlyTrashed()->orderBy('created_at', 'desc')->paginate(100);
+        return view('pages.post.trash', compact('posts'));
+    }
+
+    public function restore(Posts $post)
+    {
+        $post->restore();
+        return redirect('/post/trash')->with('success', 'Post restored successfully.');
     }
 }
