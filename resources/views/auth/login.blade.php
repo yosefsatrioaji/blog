@@ -43,7 +43,7 @@
             </label>
         </div>
         <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
-        <a href="#">Forgot password?</a>
+        <a href="/forgetpassword">Forgot password?</a>
         <p>
             Need a account? <a href="{{route('register')}}">Sign up</a>
         </p>

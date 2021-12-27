@@ -84,4 +84,9 @@ class IndexController extends Controller
         }
         return redirect('/contact')->with('success', 'Contact sent successfully.');
     }
+
+    public function author()
+    {
+        //
+    }
 }

@@ -18,7 +18,7 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('slug')->unique();
-            $table->string('profile_pict')->default('blank.png');
+            $table->string('avatar')->default(config('chatify.user_avatar.default'));
             $table->string('summary')->nullable();
             $table->boolean('verif')->default(false);
             $table->timestamp('last_seen')->nullable();

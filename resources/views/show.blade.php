@@ -20,7 +20,11 @@
         </div>
         <div class="mt-1 lg:flex items-center p-4 border border-lighter  rounded">
             <div class="w-full lg:w-1/6 w-5 text-center lg:text-left">
-                <img src="{{asset('storage/profile_pict/'.$post->user->profile_pict)}}" class="rounded-full w-32 lg:w-full">
+                @if($post->user->avatar)
+                <img src="{{asset('storage/profile_pict/'.$post->user->avatar)}}" class="rounded-full w-32 lg:w-full">
+                @else
+                <img src="{{asset('storage/profile_pict/blank.png')}}" class="rounded-full w-32 lg:w-full">
+                @endif
             </div>
             <div class="lg:pl-5 leading-loose lg:text-left text-text-color w-full lg:w-5/6">
                 By <span class="font-bold">{{$post->user->name}}
@@ -31,7 +35,7 @@
                     </svg>
                     @endif</span>
                 <div class="text-sm">
-                    <p>{{$post->user->summary}}</p><a href="#">Author's profile</a>
+                    <p>{{$post->user->summary}}</p><a href="/authors/{{$post->user->slug}}">Author's profile</a>
                 </div>
             </div>
         </div>

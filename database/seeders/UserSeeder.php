@@ -18,7 +18,7 @@ class UserSeeder extends Seeder
             'name' => 'Yosef Satrio Aji',
             'email' => 'yosef260501@gmail.com',
             'slug' => 'yosefsatrioaji',
-            'profile_pict' => 'yosef.jpg',
+            'avatar' => 'yosef.jpg',
             'summary' => 'I am Yosef Satrio Aji, a third-year student of computer engineering at Diponegoro University. Have skilled in the field of web development especially on the backend side. I also have an interest in cloud platforms like AWS, Google Cloud, etc.',
             'verif' => true,
             'password' => bcrypt('IniPasswordYa123!')

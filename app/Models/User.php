@@ -13,7 +13,7 @@ use App\Models\Posts;
 use App\Models\UserProfiles;
 use Cviebrock\EloquentSluggable\Sluggable;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable, HasRoles,SoftDeletes, Sluggable;
 
@@ -30,7 +30,8 @@ class User extends Authenticatable
         'password',
         'profile_pict',
         'summary',
-        'verif'
+        'verif',
+        'email_verified_at'
     ];
 
     /**
@@ -48,9 +49,6 @@ class User extends Authenticatable
      *
      * @var array<string, string>
      */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
 
     public function sluggable(): array
     {

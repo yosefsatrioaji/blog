@@ -121,6 +121,14 @@
                             </a>
                         </li>
                         <li class="nav-item active">
+                            <a href="/chat" class="nav-link">
+                                <i class="fas fa-comments"></i>
+                                <p>
+                                    Chat
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item active">
                             <a href="/login" class="nav-link">
                                 <i class="nav-icon fas fa-sign-in-alt"></i>
                                 <p>
@@ -141,7 +149,11 @@
                 @else
                 <div class="user-panel mt-3 pb-3 mb-3 flex-column">
                     <div class="image">
-                        <img src="{{asset('storage/profile_pict/'.Auth::user()->profile_pict)}}" class="img-circle elevation-2">
+                        @if(Auth::user()->avatar)
+                        <img src="{{asset('storage/profile_pict/'.Auth::user()->avatar)}}" class="img-circle elevation-2">
+                        @else
+                        <img src="{{asset('storage/profile_pict/blank.png')}}" class="img-circle elevation-2">
+                        @endif
                     </div>
                     <div class="info" style="vertical-align: middle;">
                         <a href="/profile" class="d-block">{{Auth::user()->name}}</a>
@@ -163,6 +175,14 @@
                                 <i class="nav-icon fas fa-th-large"></i>
                                 <p>
                                     Categories
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item active">
+                            <a href="/chat" class="nav-link">
+                                <i class="fas fa-comments"></i>
+                                <p>
+                                    Chat
                                 </p>
                             </a>
                         </li>

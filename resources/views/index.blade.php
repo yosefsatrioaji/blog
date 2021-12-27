@@ -16,7 +16,11 @@
                         {{$post->ringkasan}}
                     </p>
                     <div class="flex items-center text-sm">
-                    <img src="{{asset('storage/profile_pict/'.$post->user->profile_pict)}}" class="rounded-full w-10 h-10" title="{{$post->user->name}}">
+                        @if($post->user->avatar)
+                        <img src="{{asset('storage/profile_pict/'.$post->user->avatar)}}" class="rounded-full w-10 h-10" title="{{$post->user->name}}">
+                        @else
+                        <img src="{{asset('storage/profile_pict/blank.png')}}" class="rounded-full w-10 h-10" title="{{$post->user->name}}">
+                        @endif
                         <span class="ml-2" style="opacity: 0.7;">{{$post->user->name}}</span>
                         <span class="ml-auto" style="opacity: 0.7;">{{ \Carbon\Carbon::parse($post->created_at)->diffForHumans() }}</span>
                     </div>
