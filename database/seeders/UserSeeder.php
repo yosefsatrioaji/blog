@@ -17,6 +17,7 @@ class UserSeeder extends Seeder
         $superadmin = User::create([
             'name' => 'Yosef Satrio Aji',
             'email' => 'yosef260501@gmail.com',
+            'slug' => 'yosefsatrioaji',
             'profile_pict' => 'yosef.jpg',
             'summary' => 'I am Yosef Satrio Aji, a third-year student of computer engineering at Diponegoro University. Have skilled in the field of web development especially on the backend side. I also have an interest in cloud platforms like AWS, Google Cloud, etc.',
             'verif' => true,
@@ -33,6 +34,7 @@ class UserSeeder extends Seeder
         $admin = User::create([
             'name' => 'Admin',
             'email' => 'admin@yosefsa.xyz',
+            'slug' => 'admin',
             'password' => bcrypt('IniPasswordAdmin123!')
         ]);
 
@@ -41,6 +43,7 @@ class UserSeeder extends Seeder
         $visitor = User::create([
             'name' => 'Visitor',
             'email' => 'visitor@yosefsa.xyz',
+            'slug' => 'visitor',
             'password' => bcrypt('IniPasswordVisitor123!')
         ]);
 
@@ -49,6 +52,7 @@ class UserSeeder extends Seeder
         $visitor = User::create([
             'name' => 'Writer',
             'email' => 'writer@yosefsa.xyz',
+            'slug' => 'writer',
             'password' => bcrypt('IniPasswordWriter123!')
         ]);
 

@@ -34,10 +34,10 @@
                             <td style="vertical-align: middle;">{{$post->ringkasan}}</td>
                             <td style="vertical-align: middle;">{{$post->user->name}}</td>
                             <td style="vertical-align: middle;" class="text-center">
-                                <a class="btn btn-primary" href="{{ route('post.show', ['post' => $post->id]) }}" role="button"><i class="far fa-eye"></i></a>
+                                <a class="btn btn-success" href="{{ route('post.show', ['post' => $post->id]) }}" role="button"><i class="far fa-eye"></i></a>
                                 <a class="btn btn-warning" href="{{ route('post.edit', ['post' => $post->id]) }}" role="button"><i class="far fa-edit"></i></a>
-                                <button type="button" class="btn btn-float btn-danger" data-bs-toggle="modal" data-bs-target="#delete-modal" data-action="{{ route('post.delete', ['post' => $post->id]) }}" data-name="{{ $post->judul }}">
-                                    <i class="far fa-trash-alt"></i>
+                                <button type="button" class="btn btn-float btn-primary" data-bs-toggle="modal" data-bs-target="#restore-modal" data-action="{{ route('post.restore', ['post' => $post->id]) }}" data-name="{{ $post->judul }}">
+                                    <i class="fas fa-undo"></i>
                                 </button>
                             </td>
                         </tr>
@@ -45,27 +45,27 @@
                     </tbody>
                 </table>
             </div>
+            {{$posts->links()}}
         </div>
     </section>
 </div>
-<div class="modal fade text-left" id="delete-modal" tabindex="-1" role="dialog" aria-labelledby="delete-post" aria-hidden="true">
+<div class="modal fade text-left" id="restore-modal" tabindex="-1" role="dialog" aria-labelledby="restore-post" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="delete-post">Delete Post</h4>
+                <h4 class="modal-title" id="restore-post">Restore Post</h4>
                 <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <p>Are you sure you want to delete <b id="post-name-bold"></b>?</p>
+                <p>Are you sure you want to restore <b id="post-name-bold"></b>?</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn grey btn-outline-secondary" data-bs-dismiss="modal">Close</button>
-                <form id="delete-form" method="POST">
-                    @method('DELETE')
+                <form id="restore-form" method="POST">
                     @csrf
-                    <button type="submit" class="btn btn-outline-danger" onclick="DisableButton(this);">Delete</button>
+                    <button type="submit" class="btn btn-outline-primary" onclick="DisableButton(this);">Restore</button>
                 </form>
             </div>
         </div>
@@ -89,13 +89,13 @@
 </script>
 @push('scripts')
 <script>
-    $('#delete-modal').on('show.bs.modal', function(event) {
+    $('#restore-modal').on('show.bs.modal', function(event) {
         const button = $(event.relatedTarget);
         const action = button.data('action');
         const name = button.data('name');
 
         $(this).find('#post-name-bold').text(name);
-        $(this).find('#delete-form').attr('action', action);
+        $(this).find('#restore-form').attr('action', action);
     })
 </script>
 @endpush

@@ -16,10 +16,13 @@ class CreatePostsTable extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')
-                    ->constrained('users')
-                    ->onDelete('cascade');
+                ->constrained('users')
+                ->onDelete('cascade');
+            $table->foreignId('category_id')
+                ->constrained('categories')
+                ->onDelete('cascade');
             $table->string('slug')->unique();
-            $table->string('judul')->unique();
+            $table->string('judul');
             $table->string('cover')->nullable();
             $table->string('ringkasan');
             $table->mediumText('isi');

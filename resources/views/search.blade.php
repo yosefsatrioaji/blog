@@ -3,6 +3,7 @@
 @section('content')
 <section class="content">
     <div class="container py-4 mx-auto px-4 lg:max-w-screen-sm">
+        <h1 class="mb-10">Search : {{$search}}</h1>
         @foreach($posts as $post)
         <a href="{{ route('show', ['post' => $post->slug]) }}" class="no-underline transition rounded p-4 post-card border block w-full mb-10">
             <div class="border-0">
@@ -16,7 +17,7 @@
                         {{$post->ringkasan}}
                     </p>
                     <div class="flex items-center text-sm">
-                    <img src="{{asset('storage/profile_pict/'.$post->user->profile_pict)}}" class="rounded-full w-10 h-10" title="{{$post->user->name}}">
+                        <img src="{{asset('storage/profile_pict/'.$post->user->profile_pict)}}" class="rounded-full w-10 h-10" title="{{$post->user->name}}">
                         <span class="ml-2" style="opacity: 0.7;">{{$post->user->name}}</span>
                         <span class="ml-auto" style="opacity: 0.7;">{{ \Carbon\Carbon::parse($post->created_at)->diffForHumans() }}</span>
                     </div>

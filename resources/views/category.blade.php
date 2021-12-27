@@ -3,7 +3,8 @@
 @section('content')
 <section class="content">
     <div class="container py-4 mx-auto px-4 lg:max-w-screen-sm">
-        @foreach($posts as $post)
+        <h1 class="mb-10">{{$category->nama}}</h1>
+        @foreach($category->posts as $post)
         <a href="{{ route('show', ['post' => $post->slug]) }}" class="no-underline transition rounded p-4 post-card border block w-full mb-10">
             <div class="border-0">
                 @if($post->cover)
@@ -24,7 +25,6 @@
             </div>
         </a>
         @endforeach
-        {{$posts->links()}}
     </div>
 </section>
 @endsection

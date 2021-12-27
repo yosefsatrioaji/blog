@@ -4,7 +4,7 @@
 <div>
     <div class="content-header">
         <div class="container-fluid">
-            <h1>List Post</h1>
+            <h1>Contacts</h1>
         </div>
     </div>
     <section class="content">
@@ -20,23 +20,23 @@
                     <thead>
                         <tr>
                             <th scope="col" style="width: 5%;" class="text-center">ID</th>
-                            <th scope="col" style="width: 20%;" class="text-center">Judul</th>
-                            <th scope="col" style="width: 35%;" class="text-center">Ringkasan</th>
-                            <th scope="col" style="width: 20%;" class="text-center">Penulis</th>
-                            <th scope="col" style="width: 15%;" class="text-center"><i class="fas fa-cogs"></i></th>
+                            <th scope="col" style="width: 20%;" class="text-center">Email</th>
+                            <th scope="col" style="width: 20%;" class="text-center">Email Asli</th>
+                            <th scope="col" style="width: 15%;" class="text-center">Nama</th>
+                            <th scope="col" style="width: 35%;" class="text-center">Isi</th>
+                            <th scope="col" style="width: 5%;" class="text-center"><i class="fas fa-cogs"></i></th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($posts as $post)
+                        @foreach($contacts as $contact)
                         <tr>
-                            <th scope="row" style="vertical-align: middle;" class="text-center">{{$post->id}}</th>
-                            <td style="vertical-align: middle;">{{$post->judul}}</td>
-                            <td style="vertical-align: middle;">{{$post->ringkasan}}</td>
-                            <td style="vertical-align: middle;">{{$post->user->name}}</td>
+                            <th scope="row" style="vertical-align: middle;" class="text-center">{{$contact->id}}</th>
+                            <td style="vertical-align: middle;">{{$contact->email}}</td>
+                            <td style="vertical-align: middle;">{{$contact->actual_email}}</td>
+                            <td style="vertical-align: middle;">{{$contact->nama}}</td>
+                            <td style="vertical-align: middle;">{{$contact->isi}}</td>
                             <td style="vertical-align: middle;" class="text-center">
-                                <a class="btn btn-success" href="{{ route('post.show', ['post' => $post->id]) }}" role="button"><i class="far fa-eye"></i></a>
-                                <a class="btn btn-warning" href="{{ route('post.edit', ['post' => $post->id]) }}" role="button"><i class="far fa-edit"></i></a>
-                                <button type="button" class="btn btn-float btn-danger" data-bs-toggle="modal" data-bs-target="#delete-modal" data-action="{{ route('post.delete', ['post' => $post->id]) }}" data-name="{{ $post->judul }}">
+                                <button type="button" class="btn btn-float btn-danger" data-bs-toggle="modal" data-bs-target="#delete-modal" data-action="{{ route('contact.delete', ['contact' => $contact->id]) }}" data-name="{{ $contact->nama }}">
                                     <i class="far fa-trash-alt"></i>
                                 </button>
                             </td>
@@ -45,21 +45,21 @@
                     </tbody>
                 </table>
             </div>
-            {{$posts->links()}}
+            {{$contacts->links()}}
         </div>
     </section>
 </div>
-<div class="modal fade text-left" id="delete-modal" tabindex="-1" role="dialog" aria-labelledby="delete-post" aria-hidden="true">
+<div class="modal fade text-left" id="delete-modal" tabindex="-1" role="dialog" aria-labelledby="delete-contact" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="delete-post">Delete Post</h4>
+                <h4 class="modal-title" id="delete-contact">Delete Contact</h4>
                 <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <p>Are you sure you want to delete <b id="post-name-bold"></b>?</p>
+                <p>Are you sure you want to delete <b id="contact-name-bold"></b> contact?</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn grey btn-outline-secondary" data-bs-dismiss="modal">Close</button>
@@ -96,7 +96,7 @@
         const action = button.data('action');
         const name = button.data('name');
 
-        $(this).find('#post-name-bold').text(name);
+        $(this).find('#contact-name-bold').text(name);
         $(this).find('#delete-form').attr('action', action);
     })
 </script>

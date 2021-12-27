@@ -16,6 +16,7 @@ class PostsSeeder extends Seeder
     {
         $post = Posts::create([
             'user_id' => 1,
+            'category_id' => 1,
             'slug' => 'lorem-ipsum',
             'judul' => 'Lorem Ipsum',
             'cover' => '1640393524-photo4.jpg',

@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
+use Cviebrock\EloquentSluggable\Services\SlugService;
 
 class AuthController extends Controller
 {
@@ -61,11 +62,12 @@ class AuthController extends Controller
             'password' => 'required|min:6|max:255',
             'password_confirm' => 'required|min:6|max:255|same:password'
         ]);
-
+        $slug = SlugService::createSlug(User::class, 'slug', $request->input('name'));
         try{
             $requestUser = [
                 'name' => $request->input('name'),
                 'email' => $request->input('email'),
+                'slug' => $slug,
                 'password' => Hash::make($request->input('password')),
             ];
             DB::beginTransaction();

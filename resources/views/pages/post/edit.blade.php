@@ -29,15 +29,7 @@
                         </div>
                         <div class="form-group mb-3">
                             <label for="cover" class="form-label">Photo Cover</label>
-                            <input type="file" class="form-control" id="cover" name="cover" placeholder="Cover" accept=".png,.jpg,.jpeg">
-                        </div>
-                        <div class="form-group mb-3">
-                            <label for="kategori" class="form-label">Kategori</label>
-                            <select class="form-select" aria-label="Default select example" name="kategori" required>
-                                @foreach($categories as $category)
-                                <option value="{{$category->id}}">{{$category->nama}}</option>
-                                @endforeach
-                            </select>
+                            <input type="file" class="form-control" id="cover" name="cover" placeholder="Cover" required accept=".png,.jpg,.jpeg">
                         </div>
                         <div class="form-group mb-3">
                             <label for="ringkasan" class="form-label">Ringkasan</label>

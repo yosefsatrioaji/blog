@@ -141,7 +141,7 @@
                 @else
                 <div class="user-panel mt-3 pb-3 mb-3 flex-column">
                     <div class="image">
-                        <img src="{{asset('assets/img/profile_pict/'.Auth::user()->profile_pict)}}" class="img-circle elevation-2">
+                        <img src="{{asset('storage/profile_pict/'.Auth::user()->profile_pict)}}" class="img-circle elevation-2">
                     </div>
                     <div class="info" style="vertical-align: middle;">
                         <a href="/profile" class="d-block">{{Auth::user()->name}}</a>
@@ -159,7 +159,7 @@
                             </a>
                         </li>
                         <li class="nav-item active">
-                            <a href="/category" class="nav-link">
+                            <a href="/categories" class="nav-link">
                                 <i class="nav-icon fas fa-th-large"></i>
                                 <p>
                                     Categories
@@ -190,6 +190,18 @@
                                         <p>Buat Post</p>
                                     </a>
                                 </li>
+                                <li class="nav-item">
+                                    <a href="{{route('post.list')}}" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Published Post</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{route('post.trash')}}" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Trashed Post</p>
+                                    </a>
+                                </li>
                             </ul>
                         </li>
                         <li class="nav-item">
@@ -216,33 +228,12 @@
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="/dashboard/contact" class="nav-link">
                                 <i class="nav-icon far fa-envelope"></i>
                                 <p>
-                                    Mailbox
-                                    <i class="fas fa-angle-left right"></i>
+                                    Contacts
                                 </p>
                             </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="pages/mailbox/mailbox.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Inbox</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="pages/mailbox/compose.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Compose</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="pages/mailbox/read-mail.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Read</p>
-                                    </a>
-                                </li>
-                            </ul>
                         </li>
                         @endrole
                         <li class="nav-item active pt-2 mt-2" style="border-top: 1px solid #4f5962;">
@@ -270,6 +261,22 @@
             @yield('content')
         </div>
     </div>
+    <footer class="main-footer">
+        © 2021 Yosef Satrio Aji
+        <div class="float-right d-none d-sm-inline-block">
+            <ul class="list-unstyled d-flex">
+                <li class="ms-3">
+                    <a href="https://instagram.com/yosefsatrio26"><i class="fab fa-instagram fa-lg"></i></a>
+                </li>
+                <li class="ms-3">
+                    <a class="text-muted" href="https://github.com/yosefsatrioaji"><i class="fab fa-github fa-lg"></i></a>
+                </li>
+                <li class="ms-3">
+                    <a class="text-muted" href="https://yosefsa.xyz"><i class="fas fa-globe fa-lg"></i></a>
+                </li>
+            </ul>
+        </div>
+    </footer>
     <!-- ./wrapper -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
