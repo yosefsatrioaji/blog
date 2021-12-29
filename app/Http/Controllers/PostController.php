@@ -34,7 +34,7 @@ class PostController extends Controller
             'cover' => 'mimes:jpg,jpeg,png|max:10000',
             'kategori' => 'required',
             'ringkasan' => 'required|max:255',
-            'isi' => 'required',
+            'isi' => 'required|max:16000000',
             'keywords' => 'max:255'
         ]);
         if ($request->has('cover')) {
@@ -73,18 +73,43 @@ class PostController extends Controller
 
     public function list()
     {
-        $posts = Posts::orderBy('created_at', 'desc')->paginate(50);
+        $posts = Posts::with('user')->latest()->paginate(50);
         return view('pages.post.list', compact('posts'));
     }
 
-    public function edit()
+    public function edit($post)
     {
-        //
+        $post = Posts::withTrashed()->find($post);
+        $categories = Category::orderBy('nama', 'asc')->get();
+        return view('pages.post.edit', compact('post', 'categories'));
     }
 
-    public function update()
+    public function update(Request $request, $post)
     {
-        //
+        $request->validate([
+            'judul' => 'required|max:255',
+            'kategori' => 'required',
+            'ringkasan' => 'required|max:255',
+            'isi' => 'required|max:16000000',
+            'keywords' => 'max:255'
+        ]);
+        $slug = SlugService::createSlug(Posts::class, 'slug', $request->input('judul'));
+        try {
+            $postUpdate = Posts::withTrashed()->find($post);
+            if ($postUpdate->judul != $request->input('judul')) {
+                $slug = SlugService::createSlug(Posts::class, 'slug', $request->input('judul'));
+                $postUpdate->slug = $slug;
+            }
+            $postUpdate->judul = $request->input('judul');
+            $postUpdate->category_id = $request->input('kategori');
+            $postUpdate->ringkasan = $request->input('ringkasan');
+            $postUpdate->isi = $request->input('isi');
+            $postUpdate->keywords = $request->input('keywords');
+            $postUpdate->save();
+            return redirect('/post/list')->with('success', 'Post updated successfully.');
+        } catch (ModelNotFoundException $e) {
+            //
+        }
     }
 
     public function delete(Posts $post)
@@ -99,7 +124,7 @@ class PostController extends Controller
 
     public function trash()
     {
-        $posts = Posts::onlyTrashed()->orderBy('created_at', 'desc')->paginate(50);
+        $posts = Posts::onlyTrashed()->with('user')->orderBy('created_at', 'desc')->paginate(50);
         return view('pages.post.trash', compact('posts'));
     }
 

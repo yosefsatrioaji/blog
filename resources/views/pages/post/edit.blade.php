@@ -21,27 +21,35 @@
                 </div>
                 @endif
                 <div class="">
-                    <form method="post" action="{{route('post.store')}}" enctype="multipart/form-data">
+                    <form method="post" action="{{route('post.update', ['post' => $post->id])}}" enctype="multipart/form-data">
                         @csrf
+                        @method('put')
                         <div class="form-group mb-3">
                             <label for="judul" class="form-label">Judul</label>
-                            <input type="text" class="form-control" id="judul" name="judul" placeholder="Judul" required value="{{old('judul')}}">
+                            <input type="text" class="form-control" id="judul" name="judul" placeholder="Judul" required value="{{old('judul', $post->judul)}}">
                         </div>
                         <div class="form-group mb-3">
-                            <label for="cover" class="form-label">Photo Cover</label>
-                            <input type="file" class="form-control" id="cover" name="cover" placeholder="Cover" required accept=".png,.jpg,.jpeg">
+                            <p class="text-muted">* For now u can't update cover</p>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="kategori" class="form-label">Kategori</label>
+                            <select class="form-select" aria-label="Default select example" name="kategori" required>
+                                @foreach($categories as $category)
+                                <option value="{{$category->id}}" {{ old('id', $post->category_id) == $category->id ? 'selected' : ''}}>{{$category->nama}}</option>
+                                    @endforeach
+                            </select>
                         </div>
                         <div class="form-group mb-3">
                             <label for="ringkasan" class="form-label">Ringkasan</label>
-                            <textarea class="form-control" name="ringkasan" id="ringkasan" maxlength="255">{{old('ringkasan')}}</textarea>
+                            <textarea class="form-control" name="ringkasan" id="ringkasan" maxlength="255">{{old('ringkasan', $post->ringkasan)}}</textarea>
                         </div>
                         <div class="form-group mb-3">
                             <label for="isi" class="form-label">Isi</label>
-                            <textarea class="ckeditor form-control" name="isi" id="isi">{{old('isi')}}</textarea>
+                            <textarea class="ckeditor form-control" name="isi" id="isi">{{old('isi', $post->isi)}}</textarea>
                         </div>
                         <div class="form-group mb-3">
                             <label for="keywords" class="form-label">Keywords</label>
-                            <input type="text" class="form-control" id="keywords" name="keywords" placeholder="Keywords" value="{{old('keywords')}}">
+                            <input type="text" class="form-control" id="keywords" name="keywords" placeholder="Keywords" value="{{old('keywords', $post->keywords)}}">
                         </div>
                         <button class="btn btn-lg btn-primary mb-3" type="submit">Publish</button>
                     </form>

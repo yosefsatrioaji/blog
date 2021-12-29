@@ -14,7 +14,7 @@ class IndexController extends Controller
 {
     public function index()
     {
-        $posts = Posts::orderBy('created_at', 'desc')->paginate(10);
+        $posts = Posts::with('user')->latest()->paginate(10);
         return view('index', compact('posts'));
     }
 
@@ -26,7 +26,7 @@ class IndexController extends Controller
     public function search(Request $request)
     {
         $search = $request->input('search');
-        $posts = Posts::where('judul', 'LIKE', '%' . $request->input('search') . '%')->paginate(10);
+        $posts = Posts::with('user')->where('judul', 'LIKE', '%' . $request->input('search') . '%')->paginate(10);
         return view('search', compact('posts', 'search'));
     }
 
@@ -37,7 +37,7 @@ class IndexController extends Controller
 
     public function categoryIndex()
     {
-        $categories = Category::orderBy('nama', 'asc')->get();
+        $categories = Category::with('posts')->orderBy('nama', 'asc')->get();
         return view('indexc', compact('categories'));
     }
 

@@ -66,7 +66,7 @@ Route::group(['middleware' => ['role:super admin']], function () {
     Route::get('/post/list', [PostController::class, 'list'])->name('post.list');
     Route::get('/post/trash', [PostController::class, 'trash'])->name('post.trash');
     Route::get('/post/{post}/edit', [PostController::class, 'edit'])->name('post.edit');
-    Route::put('/post/{post}/store', [PostController::class, 'update'])->name('post.update');
+    Route::put('/post/{post}/update', [PostController::class, 'update'])->name('post.update');
     Route::delete('/post/{post}/delete', [PostController::class, 'delete'])->name('post.delete');
     Route::post('/post/{post}/restore', [PostController::class, 'restore'])->name('post.restore');
     Route::get('/category/create', [CategoryController::class, 'create'])->name('category.create');

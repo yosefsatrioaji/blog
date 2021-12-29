@@ -283,19 +283,6 @@
     </div>
     <footer class="main-footer">
         © 2021 Yosef Satrio Aji
-        <div class="float-right d-none d-sm-inline-block">
-            <ul class="list-unstyled d-flex">
-                <li class="ms-3">
-                    <a href="https://instagram.com/yosefsatrio26"><i class="fab fa-instagram fa-lg"></i></a>
-                </li>
-                <li class="ms-3">
-                    <a class="text-muted" href="https://github.com/yosefsatrioaji"><i class="fab fa-github fa-lg"></i></a>
-                </li>
-                <li class="ms-3">
-                    <a class="text-muted" href="https://yosefsa.xyz"><i class="fas fa-globe fa-lg"></i></a>
-                </li>
-            </ul>
-        </div>
     </footer>
     <!-- ./wrapper -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>

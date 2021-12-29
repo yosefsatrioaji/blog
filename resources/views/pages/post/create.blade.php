@@ -35,7 +35,7 @@
                             <label for="kategori" class="form-label">Kategori</label>
                             <select class="form-select" aria-label="Default select example" name="kategori" required>
                                 @foreach($categories as $category)
-                                <option value="{{$category->id}}">{{$category->nama}}</option>
+                                <option value="{{$category->id}}" >{{$category->nama}}</option>
                                 @endforeach
                             </select>
                         </div>
