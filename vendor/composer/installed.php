@@ -5,11 +5,20 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => 'f51aae372feb611ecb9f2357337e1bcf3cb936ab',
+        'reference' => '32c6e38f5f351721a80d7ae96df4d871a37b9a94',
         'name' => 'laravel/laravel',
         'dev' => true,
     ),
     'versions' => array(
+        'appstract/laravel-opcache' => array(
+            'pretty_version' => '4.0.2',
+            'version' => '4.0.2.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../appstract/laravel-opcache',
+            'aliases' => array(),
+            'reference' => 'd2ce88cddda6af54c14d1f9ceaaf94b54f38f9d3',
+            'dev_requirement' => false,
+        ),
         'asm89/stack-cors' => array(
             'pretty_version' => 'v2.0.3',
             'version' => '2.0.3.0',
@@ -17,6 +26,15 @@
             'install_path' => __DIR__ . '/../asm89/stack-cors',
             'aliases' => array(),
             'reference' => '9cb795bf30988e8c96dd3c40623c48a877bc6714',
+            'dev_requirement' => false,
+        ),
+        'biscolab/laravel-recaptcha' => array(
+            'pretty_version' => '5.1.0',
+            'version' => '5.1.0.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../biscolab/laravel-recaptcha',
+            'aliases' => array(),
+            'reference' => 'b3ef5c269ef3c33d40117e2d18a7f7ccd9afe05a',
             'dev_requirement' => false,
         ),
         'brick/math' => array(
@@ -427,7 +445,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => 'f51aae372feb611ecb9f2357337e1bcf3cb936ab',
+            'reference' => '32c6e38f5f351721a80d7ae96df4d871a37b9a94',
             'dev_requirement' => false,
         ),
         'laravel/sail' => array(
@@ -455,6 +473,15 @@
             'install_path' => __DIR__ . '/../laravel/serializable-closure',
             'aliases' => array(),
             'reference' => '25de3be1bca1b17d52ff0dc02b646c667ac7266c',
+            'dev_requirement' => false,
+        ),
+        'laravel/socialite' => array(
+            'pretty_version' => 'v5.2.6',
+            'version' => '5.2.6.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../laravel/socialite',
+            'aliases' => array(),
+            'reference' => 'b5c67f187ddcf15529ff7217fa735b132620dfac',
             'dev_requirement' => false,
         ),
         'laravel/tinker' => array(
@@ -509,6 +536,15 @@
             'install_path' => __DIR__ . '/../league/mime-type-detection',
             'aliases' => array(),
             'reference' => 'aa70e813a6ad3d1558fc927863d47309b4c23e69',
+            'dev_requirement' => false,
+        ),
+        'league/oauth1-client' => array(
+            'pretty_version' => 'v1.10.0',
+            'version' => '1.10.0.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../league/oauth1-client',
+            'aliases' => array(),
+            'reference' => '88dd16b0cff68eb9167bfc849707d2c40ad91ddc',
             'dev_requirement' => false,
         ),
         'mockery/mockery' => array(

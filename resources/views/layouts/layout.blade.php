@@ -4,6 +4,25 @@
 <head>
     <meta charset="utf-8">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <script type="text/javascript">
+        function callbackThen(response) {
+            // read HTTP status
+            console.log(response.status);
+
+            // read Promise object
+            response.json().then(function(data) {
+                console.log(data);
+            });
+        }
+
+        function callbackCatch(error) {
+            console.error('Error:', error)
+        }
+    </script>
+    {!! htmlScriptTagJsApi([
+    'callback_then' => 'callbackThen',
+    'callback_catch' => 'callbackCatch'
+    ]) !!}
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="index, follow">
     <meta name="copyright" content="Yosef Satrio Aji">
@@ -113,7 +132,7 @@
                             </a>
                         </li>
                         <li class="nav-item active">
-                            <a href="/category" class="nav-link">
+                            <a href="/categories" class="nav-link">
                                 <i class="nav-icon fas fa-th-large"></i>
                                 <p>
                                     Categories
@@ -196,6 +215,14 @@
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a href="/dashboard/users" class="nav-link">
+                                <i class="av-icon fas fa-users"></i>
+                                <p>
+                                    Users
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-edit"></i>
                                 <p>
@@ -220,6 +247,29 @@
                                     <a href="{{route('post.trash')}}" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Trashed Post</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-th-large"></i>
+                                <p>
+                                    Kategori
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="{{route('category.list')}}" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>List Kategori</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{route('category.create')}}" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Buat Kategori</p>
                                     </a>
                                 </li>
                             </ul>

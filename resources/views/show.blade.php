@@ -6,7 +6,7 @@
     <div class="container py-4 mx-auto px-4 lg:max-w-screen-sm">
         <h1 class="mb-2">{{$post->judul}}</h1>
         <div class="flex items-center text-smt" style="opacity: 0.7;">
-            <span>{{ \Carbon\Carbon::parse($post->created_at)->diffForHumans() }}</span>
+            <span>{{ \Carbon\Carbon::parse($post->created_at)->format('d F Y') }}</span>
             —
             <a href="/categories/{{$post->category->slug}}" class="text-muted">{{$post->category->nama}}</a>
         </div>

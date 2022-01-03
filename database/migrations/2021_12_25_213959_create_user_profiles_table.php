@@ -22,6 +22,7 @@ class CreateUserProfilesTable extends Migration
             $table->string('twitter')->nullable();
             $table->string('facebook')->nullable();
             $table->string('github')->nullable();
+            $table->string('tiktok')->nullable();
             $table->string('website')->nullable();
             $table->softDeletes();
             $table->timestamps();

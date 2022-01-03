@@ -43,6 +43,14 @@
             </label>
         </div>
         <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+        <div class="or-container">
+            <div class="line-separator"></div>
+            <div class="or-label">or</div>
+            <div class="line-separator"></div>
+        </div>
+        <div class="row mb-4">
+            <div class="col-md-12"> <a class="btn w-100 btn-lg btn-google btn-outline" href="/auth/redirect"><img src="https://img.icons8.com/color/16/000000/google-logo.png"> Sign in using Google</a> </div>
+        </div>
         <a href="/forgetpassword">Forgot password?</a>
         <p>
             Need a account? <a href="{{route('register')}}">Sign up</a>
@@ -59,6 +67,31 @@
         -webkit-user-select: none;
         -moz-user-select: none;
         user-select: none;
+    }
+
+    .btn-google {
+        color: #545454;
+        background-color: #ffffff;
+        box-shadow: 0 1px 2px 1px #ddd
+    }
+
+    .or-container {
+        align-items: center;
+        color: #ccc;
+        display: flex;
+        margin: 25px 0
+    }
+
+    .line-separator {
+        background-color: #ccc;
+        flex-grow: 5;
+        height: 1px
+    }
+
+    .or-label {
+        flex-grow: 1;
+        margin: 0 15px;
+        text-align: center
     }
 
     @media (min-width: 768px) {

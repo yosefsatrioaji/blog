@@ -8,7 +8,9 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
+use App\Models\UserProfiles;
 use Cviebrock\EloquentSluggable\Services\SlugService;
+use Laravel\Socialite\Facades\Socialite;
 
 class AuthController extends Controller
 {
@@ -72,6 +74,7 @@ class AuthController extends Controller
             DB::beginTransaction();
             $user = User::create($requestUser);
             $user->assignRole('visitor');
+            $user->userProfile()->create();
             DB::commit();
             return redirect('/login')->with('signup_success', 'Signup successfuly, please login');
         } catch (ModelNotFoundException $exception) {
@@ -129,5 +132,43 @@ class AuthController extends Controller
     public function forgetPassword()
     {
         return view('auth.forgot');
+    }
+
+    public function redirectToProvider()
+    {
+        return Socialite::driver('google')->redirect();
+    }
+
+    public function handleProviderCallback(Request $request)
+    {
+        try {
+            $user_google    = Socialite::driver('google')->user();
+            $user           = User::where('email', $user_google->getEmail())->first();
+
+            //jika user ada maka langsung di redirect ke halaman home
+            //jika user tidak ada maka simpan ke database
+            //$user_google menyimpan data google account seperti email, foto, dsb
+
+            if ($user != null) {
+                \auth()->login($user, true);
+                return redirect()->route('/');
+            } else {
+                $slug = SlugService::createSlug(User::class, 'slug', $user_google->getName());
+                $user = User::Create([
+                    'email'             => $user_google->getEmail(),
+                    'name'              => $user_google->getName(),
+                    'password'          => 0,
+                    'email_verified_at' => now(),
+                    'slug' => $slug
+                ]);
+                $user->assignRole('visitor');
+                $user->userProfile()->create();
+
+                \auth()->login($user, true);
+                return redirect()->route('/');
+            }
+        } catch (\Exception $e) {
+            return redirect()->route('login');
+        }
     }
 }

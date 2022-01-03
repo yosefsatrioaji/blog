@@ -29,6 +29,7 @@ Route::get('/categories/', [IndexController::class, 'categoryIndex'])->name('cat
 Route::get('/categories/{category:slug}', [IndexController::class, 'category'])->name('category.show');
 Route::get('/contact', [IndexController::class, 'contact'])->name('contact');
 Route::post('/contact/submit', [IndexController::class, 'submitContact'])->name('contact.submit');
+Route::get('/authors/{users:slug}', [IndexController::class, 'author'])->name('author');
 
 Route::group(['middleware' => ['guest']], function () {
     Route::get('/login', [AuthController::class, 'login'])->name('login');
@@ -39,6 +40,8 @@ Route::group(['middleware' => ['guest']], function () {
     Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
     Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
     Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('password.update');
+    Route::get('/auth/redirect', [AuthController::class, 'redirectToProvider']);
+    Route::get('/auth/callback', [AuthController::class, 'handleProviderCallback']);
 });
 
 Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['role:super admin']], function () {
@@ -57,6 +60,12 @@ Route::group(['middleware' => ['auth']], function () {
 
 Route::group(['middleware' => ['role:super admin']], function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/dashboard/phpinfo', [DashboardController::class, 'phpinfo'])->name('phpinfo');
+    Route::get('/dashboard/users',[DashboardController::class,'users'])->name('users.dashboard');
+    Route::get('/dashboard/users/{user}/edit',[DashboardController::class,'userEdit'])->name('user.edit');
+    Route::put('/dashboard/users/{user}/update',[DashboardController::class,'userUpdate'])->name('user.update');
+    Route::delete('/dashboard/users/{user}/delete',[DashboardController::class,'userDelete'])->name('user.delete');
+    Route::post('/dashboard/users/{user}/restore',[DashboardController::class,'userRestore'])->name('user.restore');
     Route::get('/dashboard/contact', [DashboardController::class, 'contact'])->name('dashboard.contact');
     Route::delete('/dashboard/contact/{contact}/delete', [DashboardController::class, 'contactDelete'])->name('contact.delete');
     Route::post('/post/store', [PostController::class, 'store'])->name('post.store');

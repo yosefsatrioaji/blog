@@ -28,7 +28,9 @@ class UserSeeder extends Seeder
         $superadmin->userProfile()->create([
             'instagram' => 'yosefsatrio26',
             'github' => 'yosefsatrioaji',
-            'website' => 'yosefsa.xyz'
+            'website' => 'yosefsa.xyz',
+            'tiktok' => 'couriernew',
+            'twitter' => 'ajiyosef'
         ]);
 
         $admin = User::create([
@@ -39,6 +41,7 @@ class UserSeeder extends Seeder
         ]);
 
         $admin->assignRole('admin');
+        $admin->userProfile()->create();
 
         $visitor = User::create([
             'name' => 'Visitor',
@@ -48,14 +51,16 @@ class UserSeeder extends Seeder
         ]);
 
         $visitor->assignRole('visitor');
+        $visitor->userProfile()->create();
 
-        $visitor = User::create([
+        $writer = User::create([
             'name' => 'Writer',
             'email' => 'writer@yosefsa.xyz',
             'slug' => 'writer',
             'password' => bcrypt('IniPasswordWriter123!')
         ]);
 
-        $visitor->assignRole('writer');
+        $writer->assignRole('writer');
+        $writer->userProfile()->create();
     }
 }

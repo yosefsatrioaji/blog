@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Posts;
 use App\Models\Category;
 use App\Models\Contact;
+use App\Models\User;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -32,7 +33,9 @@ class IndexController extends Controller
 
     public function category(Category $category)
     {
-        return view('category', compact('category'));
+        $nama = $category->nama;
+        $category = $category->posts->load('user');
+        return view('category', compact('category', 'nama'));
     }
 
     public function categoryIndex()
@@ -85,8 +88,10 @@ class IndexController extends Controller
         return redirect('/contact')->with('success', 'Contact sent successfully.');
     }
 
-    public function author()
+    public function author(User $users)
     {
-        //
+        $user_profile = $users->userProfile;
+        $posts = $users->posts->load('user');
+        return view('author', compact('user_profile', 'posts', 'users'));
     }
 }

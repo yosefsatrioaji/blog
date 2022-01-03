@@ -3,8 +3,8 @@
 @section('content')
 <section class="content">
     <div class="container py-4 mx-auto px-4 lg:max-w-screen-sm">
-        <h1 class="mb-10">{{$category->nama}}</h1>
-        @foreach($category->posts as $post)
+        <h1 class="mb-10">{{$nama}}</h1>
+        @foreach($category as $post)
         <a href="{{ route('show', ['post' => $post->slug]) }}" class="no-underline transition rounded p-4 post-card border block w-full mb-10">
             <div class="border-0">
                 @if($post->cover)
